@@ -1,0 +1,59 @@
+#include <cassert>
+#include <string>
+#include <iostream>
+#include <fstream>
+#include <iomanip>
+#include "popFile.h"
+#include "popChunk.h"
+
+namespace popLua {
+
+	popFile::~popFile() {
+		delete[] header;
+		delete[] name;
+		delete[] chunkArray;
+	}
+
+	void popFile::process() {
+		std::ofstream outfile;
+
+		outfile.open("output.lua");
+
+		int fileSize = getFileSize();
+		stringArray.resize(fileSize);
+
+		chunkArray[0].process(stringArray);
+		std::cout << std::endl;
+
+		for (int i = 0; i < stringArray.size(); i++) {
+			outfile << stringArray[i] << std::endl;
+		}
+
+		outfile.close();
+	}
+
+	int popFile::getFileSize() {
+		return chunkArray[0].getLastLine();
+	}
+
+	std::istream& operator >> (std::istream& in, popFile& file) {
+		file.header = new char[popFile::HEADER_SIZE];
+		in.read(file.header, popFile::HEADER_SIZE);
+
+		in.read(reinterpret_cast<char *>(&file.nameSize), sizeof(file.nameSize));
+		file.name = new char[file.nameSize];
+		in.read(file.name, file.nameSize);
+
+		file.chunkArray = new popChunk[1];
+		in >> file.chunkArray[0];
+
+		return in;
+	}
+
+	std::ostream& operator << (std::ostream& out, popFile& file) {
+		std::cout << file.name << std::endl << std::endl;
+		std::cout << "Main block" << std::endl << std::endl;
+		std::cout << file.chunkArray[0];
+		return out;
+	}
+}
