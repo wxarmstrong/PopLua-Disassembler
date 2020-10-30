@@ -10,7 +10,6 @@ namespace popLua {
 	class popFile {
 	public:
 		~popFile();
-		void process();
 		int getFileSize();
 		friend std::istream& operator >> (std::istream& in, popFile &file);
 		friend std::ostream& operator << (std::ostream& out, popFile &file);

@@ -373,34 +373,34 @@ namespace popLua {
 
 		if (chunk.numLocals > 0) {
 			for (int i = 0; i < chunk.depth; i++) {
-				std::cout << "   ";
+				out << "   ";
 			}
-			std::cout << std::setw(3) << std::right << chunk.numLocals << " locals: " << std::endl;
+			out << std::setw(3) << std::right << chunk.numLocals << " locals: " << std::endl;
 			for (int i = 0; i < chunk.depth; i++) {
-				std::cout << "   ";
+				out << "   ";
 			}
-			std::cout << "-----------SCOPE: Begin   End" << std::endl;
+			out << "-----------SCOPE: Begin   End" << std::endl;
 			for (int i = 0; i < chunk.numLocals; i++) {
 				popLocal*curLocal = &(chunk.localArray[i]);
 				for (int j = 0; j < chunk.depth; j++) {
-					std::cout << "   ";
+					out << "   ";
 				}
-				std::cout << std::setw(3) << std::right << i << ": " << std::left << std::setw(8) << curLocal->getName();
-				std::cout << "       " << curLocal->getBegin() << "      " << curLocal->getEnd();
-				std::cout << std::endl;
+				out << std::setw(3) << std::right << i << ": " << std::left << std::setw(8) << curLocal->getName();
+				out << "       " << curLocal->getBegin() << "      " << curLocal->getEnd();
+				out << std::endl;
 			}
-			std::cout << std::endl;
+			out << std::endl;
 		}
 		/*
 		else {
-			std::cout << "No locals" << std::endl; //Sheerly diagnostic
+			out << "No locals" << std::endl; //Sheerly diagnostic
 		}
 		*/
 		if (chunk.numUpvals > 0) {
 			for (int i = 0; i < chunk.depth; i++) {
-				std::cout << "   ";
+				out << "   ";
 			}
-			std::cout << std::setw(3) << std::right << chunk.numUpvals << " upvals: " << std::endl;
+			out << std::setw(3) << std::right << chunk.numUpvals << " upvals: " << std::endl;
 			for (int i = 0; i < chunk.numUpvals; i++) {
 				/*
 				FILL IN WITH THE REST
@@ -409,40 +409,40 @@ namespace popLua {
 		}
 		/*
 		else {
-			std::cout << "No upvals" << std::endl; //Sheerly diagnostic
+			out << "No upvals" << std::endl; //Sheerly diagnostic
 		}
 		*/
 		if (chunk.numConstants > 0) {
 			for (int i = 0; i < chunk.depth; i++) {
-				std::cout << "   ";
+				out << "   ";
 			}
-			std::cout << std::setw(3) << std::right << chunk.numConstants << " constants: " << std::endl;
+			out << std::setw(3) << std::right << chunk.numConstants << " constants: " << std::endl;
 		}
 		/*
 		else {
-			std::cout << "No constants" << std::endl; // Sheerly diagnostic
+			out << "No constants" << std::endl; // Sheerly diagnostic
 		}
 		*/
 		for (int i = 0; i < chunk.numConstants; i++) {
 			for (int j = 0; j < chunk.depth; j++) {
-				std::cout << "   ";
+				out << "   ";
 			}
-			std::cout << std::setw(3) << std::right << i << ": " << chunk.constantArray[i] << std::endl;
+			out << std::setw(3) << std::right << i << ": " << chunk.constantArray[i] << std::endl;
 		}
-		std::cout << std::endl;
+		out << std::endl;
 
 		//Prototypes
 		if (chunk.numProto > 0) {
 			for (int i = 0; i < chunk.depth; i++) {
-				std::cout << "   ";
+				out << "   ";
 			}
-			std::cout << std::setw(3) << std::right << chunk.numProto << " prototypes: " << std::endl << std::endl;
+			out << std::setw(3) << std::right << chunk.numProto << " prototypes: " << std::endl << std::endl;
 			for (int i = 0; i < chunk.numProto; i++) {
 				for (int j = 0; j < chunk.depth + 1; j++) {
-					std::cout << "   ";
+					out << "   ";
 				}
-				std::cout << "Prototype " << std::setw(3) << std::right << i << ": " << std::endl << std::endl;
-				std::cout << chunk.chunkArray[i];
+				out << "Prototype " << std::setw(3) << std::right << i << ": " << std::endl << std::endl;
+				out << chunk.chunkArray[i];
 			}
 		}
 
@@ -450,17 +450,17 @@ namespace popLua {
 
 		if (chunk.numOps > 0) {
 			for (int i = 0; i < chunk.depth; i++) {
-				std::cout << "   ";
+				out << "   ";
 			}
-			std::cout << std::setw(3) << std::right << chunk.numOps << " instructions: " << std::endl;
+			out << std::setw(3) << std::right << chunk.numOps << " instructions: " << std::endl;
 
 			for (int i = 0; i < chunk.numOps; i++) {
 				for (int j = 0; j < chunk.depth; j++) {
-					std::cout << "   ";
+					out << "   ";
 				}
-				std::cout << std::setw(3) << std::right << i << ": " << chunk.opArray[i] << std::endl;
+				out << std::setw(3) << std::right << i << ": " << chunk.opArray[i] << std::endl;
 			}
-			std::cout << std::endl;
+			out << std::endl;
 		}
 
 		return out;

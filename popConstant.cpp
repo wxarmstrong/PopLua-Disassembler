@@ -51,7 +51,7 @@ namespace popLua {
 	}
 
 	std::ostream& operator << (std::ostream& out, const popConstant& constant) {
-		std::cout << constant.value;
+		out << constant.value;
 		return out;
 	}
 

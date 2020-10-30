@@ -16,8 +16,8 @@ int main(int argc, char* argv[]) {
 		popFile file;
 		std::ifstream in(argv[1], std::ios::binary);
 		in >> file;
-		file.process();
-		std::cout << file;
+		std::ofstream out("output.txt");
+		out << file;
 		in.close();
 	}
 	std::cout << std::endl;

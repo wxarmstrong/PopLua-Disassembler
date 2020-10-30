@@ -14,24 +14,6 @@ namespace popLua {
 		delete[] chunkArray;
 	}
 
-	void popFile::process() {
-		std::ofstream outfile;
-
-		outfile.open("output.lua");
-
-		int fileSize = getFileSize();
-		stringArray.resize(fileSize);
-
-		chunkArray[0].process(stringArray);
-		std::cout << std::endl;
-
-		for (int i = 0; i < stringArray.size(); i++) {
-			outfile << stringArray[i] << std::endl;
-		}
-
-		outfile.close();
-	}
-
 	int popFile::getFileSize() {
 		return chunkArray[0].getLastLine();
 	}
@@ -51,9 +33,9 @@ namespace popLua {
 	}
 
 	std::ostream& operator << (std::ostream& out, popFile& file) {
-		std::cout << file.name << std::endl << std::endl;
-		std::cout << "Main block" << std::endl << std::endl;
-		std::cout << file.chunkArray[0];
+		out << file.name << std::endl << std::endl;
+		out << "Main block" << std::endl << std::endl;
+		out << file.chunkArray[0];
 		return out;
 	}
 }
