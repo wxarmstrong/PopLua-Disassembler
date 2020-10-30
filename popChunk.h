@@ -14,7 +14,6 @@ namespace popLua {
 	public:
 		popChunk(uint8_t newDepth = 0);
 		~popChunk();
-		void process(std::vector<std::string>& stringArray);
 		int getLastLine();
 		void setDepth(uint8_t newDepth = 0);
 		friend std::istream& operator >> (std::istream& in, popChunk& chunk);
