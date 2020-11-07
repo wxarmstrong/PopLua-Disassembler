@@ -1,6 +1,7 @@
 #ifndef POPUPVAL_H
 #define POPUPVAL_H
 
+#include <iostream>
 #include <string>
 
 namespace popLua {
@@ -9,6 +10,7 @@ namespace popLua {
 	public:
 		void setName(std::string);
 		std::string getName();
+		friend std::ostream& operator << (std::ostream& out, const popUpval& upval);
 	private:
 		uint32_t length;
 		std::string name;

@@ -199,9 +199,10 @@ namespace popLua {
 			}
 			out << std::setw(3) << std::right << chunk.numUpvals << " upvals: " << std::endl;
 			for (int i = 0; i < chunk.numUpvals; i++) {
-				/*
-				FILL IN WITH THE REST
-				*/
+				for (int j = 0; j < chunk.depth; j++) {
+					out << "   ";
+				}
+				out << std::setw(3) << std::right << i << ": " << chunk.upvalArray[i] << std::endl;
 			}
 		}
 		/*
